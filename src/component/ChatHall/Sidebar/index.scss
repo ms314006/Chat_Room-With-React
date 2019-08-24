@@ -1,0 +1,15 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background: #303030;
+    color: #D4D4D4;
+    transition: width 1s;
+}
+
+.openSidebar {
+    width: 308px;
+}
+
+.closeSidebar {
+    width: 52px;
+}
