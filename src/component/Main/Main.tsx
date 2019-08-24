@@ -1,8 +1,13 @@
 import React from 'react';
+import Entrance from '../Entrance';
+import styles from './index.scss';
 
 const Main = (): JSX.Element => (
-  <div data-testid="main_block">
-    1111223
+  <div
+    className={styles.mainBlock}
+    data-testid="main_block"
+  >
+    <Entrance />
   </div>
 );
 
