@@ -41,7 +41,7 @@ const RoomList = (props: any) => {
 };
 
 const CurrentChatRoomList = () => {
-  const [chatRooms] = useState(['B022.隨機配對', '大家一起聊吧！']);
+  const [chatRooms] = useState(['B022.隨機配對', '大家一起聊吧！', 'B023.隨機配對', 'B024.隨機配對', 'B025.隨機配對', 'B026.隨機配對']);
   return (
     <div className={styles.listBlock}>
       {
