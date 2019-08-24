@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Typography from '@material-ui/core/Typography';
+import { HashRouter } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Main from './component/Main';
@@ -12,8 +12,10 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <Main />
-  </ThemeProvider>,
+  <HashRouter>
+    <ThemeProvider theme={theme}>
+      <Main />
+    </ThemeProvider>
+  </HashRouter>,
   document.getElementById('root')
 );
