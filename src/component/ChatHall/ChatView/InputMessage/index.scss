@@ -1,0 +1,49 @@
+.inputMessageBlock {
+    display: grid;
+    grid-template-rows: 36px 1fr 48px;
+    color: #D4D4D4;
+    font-size: 24px;
+}
+
+.topBlock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: #303030;
+    font-size: 16px;
+}
+
+.centerBlock {
+    box-sizing: border-box;
+    padding: 0px 8px 0px 24px;
+    display: flex;
+    font-size: 16px;
+    overflow-y: auto;
+}
+
+.userNameBlock {
+    display: flex;
+    width: 120px;
+}
+
+.userName {
+    color: #6A9955;
+}
+
+.inputBlock {
+    width: calc(100% - 120px);
+    overflow-y: auto; 
+}
+
+.bottomBlock {
+    box-sizing: border-box;
+    padding-left: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space:nowrap;
+}
+
+.iconGap {
+    margin: 0px 8px 0px 24px;
+}

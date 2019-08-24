@@ -1,6 +1,6 @@
 .chatView {
     display: grid;
-    grid-template-rows: 44px 1fr 198px;
+    grid-template-rows: 44px calc(100vh - 242px) 198px;
     background: #1E1E1E;
     line-height: 28px;
 }
