@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import ChatView from './ChatView';
 import styles from './index.scss';
 
 const ChatHall = () => {
@@ -8,6 +9,7 @@ const ChatHall = () => {
       className={styles.chatHall}
     >
       <Sidebar />
+      <ChatView />
     </div>
   );
 };

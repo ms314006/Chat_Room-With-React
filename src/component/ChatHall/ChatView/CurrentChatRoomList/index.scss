@@ -1,0 +1,20 @@
+.listBlock {
+    display: flex;
+    background: #303030;
+}
+
+.roomList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0px 16px;
+    width: 272px;
+    height: 44px;
+    font-size: 12px;
+    color: #D4D4D4;
+}
+
+.currentRoom {
+    background: #1E1E1E;
+}
