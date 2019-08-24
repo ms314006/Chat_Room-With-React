@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import styles from './index.scss';
+import mainStyles from '../../../style/index.scss';
 
 const useStyles = makeStyles({
   root: {
+    width: '100%',
     background: '#252526',
     fontSize: '20px',
     boxShadow: '0px 0px',
@@ -23,24 +25,36 @@ const useStyles = makeStyles({
 const SetNameOption = () => {
   const classes = useStyles({});
   return (
-    <div className={styles.entanceOption}>
-      <Button
-        variant="contained"
-        classes={{
-          root: `${classes.root} ${classes.anonymous}`,
-        }}
+    <>
+      <Link
+        to="/entrance/setChatMode"
+        className={mainStyles.removeLinkStyle}
+        style={{ textAlign: 'center', }}
       >
-        [ 匿名聊天 ]
-      </Button>
-      <Button
-        variant="contained"
-        classes={{
-          root: `${classes.root} ${classes.nickname}`,
-        }}
+        <Button
+          variant="contained"
+          classes={{
+            root: `${classes.root} ${classes.anonymous}`,
+          }}
+        >
+          [ 匿名聊天 ]
+        </Button>
+      </Link>
+      <Link
+        to="/entrance/setNickName"
+        className={mainStyles.removeLinkStyle}
+        style={{ textAlign: 'center', }}
       >
-        [ 暱稱聊天 ]
-      </Button>
-    </div>
+        <Button
+          variant="contained"
+          classes={{
+            root: `${classes.root} ${classes.nickname}`,
+          }}
+        >
+          [ 暱稱聊天 ]
+        </Button>
+      </Link>
+    </>
   );
 };
 
