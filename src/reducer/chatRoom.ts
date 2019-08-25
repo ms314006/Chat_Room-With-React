@@ -9,6 +9,51 @@ const chatHall = new ChatHall();
 let currentChatRoom = null;
 let user = null;
 
+const autoResponse = () => {
+  const firstWelcomeMessage = () => {
+    currentChatRoom.addMessage(new Message(
+      getCurrentTime(),
+      'superUser',
+      '嗨！你好啊！我是超級使用者，雖然這裡還沒什麼人，但我會偶爾回覆你的！'
+    ));
+    currentChatRoom.addMessage(new Message(
+      getCurrentTime(),
+      'superUser',
+      '但是但是，真的偶爾而已哦！你也知道超級使用者是很忙的！'
+    ));
+  };
+
+  const secondWelcomeMessage = () => {
+    currentChatRoom.addMessage(new Message(
+      getCurrentTime(),
+      'superUser',
+      '欸啊啊！我忘了說，如果你在等我的時候覺得無聊，可以到神 Q 超人的 Medium 看看！'
+    ));
+    currentChatRoom.addMessage(new Message(
+      getCurrentTime(),
+      'superUser',
+      'https://medium.com/enjoy-life-enjoy-coding'
+    ));
+    currentChatRoom.addMessage(new Message(
+      getCurrentTime(),
+      'superUser',
+      '自從看了，我每次考試都一百分呢：）'
+    ));
+  };
+
+  switch (true){
+    case currentChatRoom.messages.length === 1:
+      firstWelcomeMessage();
+      break;
+    case currentChatRoom.messages.length === 4:
+      secondWelcomeMessage();
+      break;
+    default:
+      break;
+  }
+};
+
+
 const initiState = {
   username: '',
   publicChatRooms: [],
@@ -50,11 +95,13 @@ const chatRoomReducer = (state = initiState, action: any) => {
       return updateChatRoomInfo();
     }
     case actions.SEND_MESSAGE: {
-      const time = getCurrentTime();
       const message = new Message(
-        time, user.name, action.payload.message
+        getCurrentTime(), user.name, action.payload.message
       );
       currentChatRoom.addMessage(message);
+
+      autoResponse();
+
       return updateChatRoomInfo();
     }
     case actions.CHANGE_CURRENT_CHAT_ROOM:
