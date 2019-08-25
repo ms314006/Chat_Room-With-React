@@ -41,8 +41,9 @@ const RoomList = (props: any) => {
         classes={{
           root: classes.root,
         }}
-        onClick={() => {
+        onClick={(event) => {
           dispatch(leaveChatRoom(chatRoom));
+          event.stopPropagation();
         }}
       >
         <i className="fas fa-times" />

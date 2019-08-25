@@ -10,7 +10,6 @@ let currentChatRoom = null;
 let user = null;
 
 const initiState = {
-  messages: [],
   username: '',
   publicChatRooms: [],
   participateChatRooms: [],
@@ -63,6 +62,7 @@ const chatRoomReducer = (state = initiState, action: any) => {
       return updateChatRoomInfo();
     case actions.LEAVE_CHAT_ROOM: {
       user.leaveChatRoom(action.payload.chatRoom);
+      [currentChatRoom] = user.chatRooms;
       return updateChatRoomInfo();
     }
     default:
