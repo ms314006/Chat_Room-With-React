@@ -15,10 +15,16 @@ const ChatWindow = () => {
 
   const updateScallPosition = useCallback(
     () => {
-      chatWindow.current.scrollTop = chatWindow.current.scrollHeight;
+      if (chatWindow.current) {
+        chatWindow.current.scrollTop = chatWindow.current.scrollHeight;
+      }
     },
     [messages]
   );
+
+  useEffect(() => {
+    updateScallPosition();
+  });
 
   const isSameOfLast = (index: number) => (
     index !== 0
@@ -49,7 +55,6 @@ const ChatWindow = () => {
     messagesRange = messagesRange.slice(index + 1);
     const initMessage: any[] = [messages[index]];
     const messageGroup = generateMessageGroupArray(messagesRange, initMessage);
-    updateScallPosition();
     return (
       isSelfMessage(index)
         ? <SelfMessage messageGroup={messageGroup} />
