@@ -1,0 +1,33 @@
+.createChatRoomBlock {
+    display: grid;
+    grid-template-rows: 200px 60px 40px;
+    width: 100%;
+}
+
+.createForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.numberPeopleLimitRemarkBlock {
+    display: flex;
+    align-items: flex-end;
+}
+
+.numberPeopleLimitBlock {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #D4D4D4;
+}
+
+.limitRemark {
+    color: #6C6C6C;
+    font-size: 12px;
+}
+
+.remark {
+    color: #6A9955;
+    font-size: 12px;
+}
