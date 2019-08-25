@@ -97,6 +97,7 @@ const InputMessage = () => {
             onKeyDown={(e) => {
               if (e.keyCode === 13) {
                 submitMessage();
+                e.preventDefault();
               }
             }}
           />
