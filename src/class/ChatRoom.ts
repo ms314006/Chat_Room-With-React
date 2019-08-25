@@ -1,22 +1,22 @@
 import { IChatRoom } from '../interface/IChatRoom';
-import { IPeople } from '../interface/IPeople';
+import { IUser } from '../interface/IUser';
 
 class ChatRoom implements IChatRoom {
 
   name: string;
 
-  peoples: IPeople[] = [];
+  users: IUser[] = [];
 
   constructor(name: string) {
     this.name = name;
   }
 
-  addPeople = (people: IPeople): void => {
-    this.peoples.push(people);
+  addUser = (user: IUser): void => {
+    this.users.push(user);
   };
 
-  subPeople = (people: IPeople): void => {
-    this.peoples.splice(this.peoples.indexOf(people), 1);
+  subUser = (user: IUser): void => {
+    this.users.splice(this.users.indexOf(user), 1);
   };
 
 }

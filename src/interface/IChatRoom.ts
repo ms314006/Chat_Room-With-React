@@ -1,8 +1,8 @@
-import { IPeople } from './IPeople';
+import { IUser } from './IUser';
 
 export interface IChatRoom {
   name: string;
-  peoples: IPeople[];
-  addPeople: (people: IPeople) => void;
-  subPeople: (people: IPeople) => void;
+  users: IUser[];
+  addUser: (user: IUser) => void;
+  subUser: (user: IUser) => void;
 }
