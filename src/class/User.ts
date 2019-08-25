@@ -1,8 +1,8 @@
 import uuidv1 from 'uuid/v1';
-import { IPeople } from '../interface/IPeople';
+import { IUser } from '../interface/IUser';
 import { IChatRoom } from '../interface/IChatRoom';
 
-class People implements IPeople {
+class User implements IUser {
 
   name: string;
 
@@ -14,13 +14,13 @@ class People implements IPeople {
 
   joinChatRoom = (chatRoom: IChatRoom) => {
     this.chatRooms.push(chatRoom);
-    chatRoom.addPeople(this);
+    chatRoom.addUser(this);
   }
 
   leaveChatRoom = (chatRoom: IChatRoom) => {
     this.chatRooms.splice(this.chatRooms.indexOf(chatRoom), 1);
-    chatRoom.subPeople(this);
+    chatRoom.subUser(this);
   }
 }
 
-export default People;
+export default User;
