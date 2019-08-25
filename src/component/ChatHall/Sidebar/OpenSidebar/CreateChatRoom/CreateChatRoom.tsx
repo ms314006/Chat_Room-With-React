@@ -67,6 +67,12 @@ const CreateChatRoom = (props: any) => {
         });
         return false;
       }
+      if (chatRoomInfo.name.length > 12) {
+        setValidator({
+          name: { result: true, message: '聊天室名稱長度不得大於 12 ！', },
+        });
+        return false;
+      }
       return true;
     };
 
@@ -87,7 +93,7 @@ const CreateChatRoom = (props: any) => {
             onChange={(e) => {
               setChatRoomInfo({
                 ...chatRoomInfo,
-                name: e.target.value,
+                name: e.target.value.replace(' ', ''),
               });
             }}
             className={classes.textField}
