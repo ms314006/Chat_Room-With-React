@@ -1,0 +1,41 @@
+
+.chatRoomsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.listTitle {
+    padding: 0px 8px;
+    display: flex;
+    align-items: center;
+    height: 32px;
+    width: 100%;
+    background: #414141;
+}
+
+.listBlock {
+    box-sizing: border-box;
+    padding: 0px 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    transition: height 1s;
+}
+
+.openListBlock {
+    height: calc((100vh - 360px) / 2);
+}
+
+.closeListBlock {
+    height: 0px;
+}
+
+.list {
+    box-sizing: border-box;
+    padding: 0px 16px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
