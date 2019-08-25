@@ -2,9 +2,12 @@ import * as actions from '../action/chatRoom';
 import ChatHall from '../class/ChatHall';
 import ChatRoom from '../class/ChatRoom';
 import User from '../class/User';
+import Message from '../class/Message';
+import { getCurrentTime } from '../utils';
 
 const initiState = {
   chatHall: new ChatHall(),
+  currentChatRoom: null,
   user: null,
 };
 
@@ -21,6 +24,17 @@ const chatRoomReducer = (state = initiState, action: any) => {
       );
       state.chatHall.addChatRoom(chatRoom);
       state.user.joinChatRoom(chatRoom);
+      return {
+        ...state,
+        currentChatRoom: chatRoom,
+      };
+    }
+    case actions.SEND_MESSAGE: {
+      const time = getCurrentTime();
+      const message = new Message(
+        time, state.user.name, action.payload.message
+      );
+      state.currentChatRoom.addMessage(message);
       return { ...state, };
     }
     default:

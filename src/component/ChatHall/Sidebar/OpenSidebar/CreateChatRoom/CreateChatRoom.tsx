@@ -13,7 +13,7 @@ import styles from './index.scss';
 const useStyles = makeStyles({
   textField: {
     '& .MuiInputBase-root': {
-      width: '100%',
+      width: '240px',
       color: '#AAAAAA',
       fontSize: 16,
     },

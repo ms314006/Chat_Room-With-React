@@ -9,4 +9,5 @@ export interface IChatRoom {
   messages: IMessage[];
   addUser: (user: IUser) => void;
   subUser: (user: IUser) => void;
+  addMessage: (message: IMessage) => void;
 }

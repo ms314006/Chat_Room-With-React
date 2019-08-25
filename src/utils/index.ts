@@ -8,3 +8,9 @@ export const fillZeroToTwoLength = (word: number) => {
   }
   return result;
 };
+
+export const getCurrentTime = () => {
+  const date = new Date();
+
+  return `${fillZeroToTwoLength(date.getHours())}:${fillZeroToTwoLength(date.getMinutes())}`;
+};

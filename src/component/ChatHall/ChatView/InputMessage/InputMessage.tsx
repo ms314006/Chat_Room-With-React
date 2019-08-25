@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import { sendMessage } from '../../../../action/chatRoom';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -50,6 +52,9 @@ const useStyles = makeStyles({
 
 const InputMessage = () => {
   const classes = useStyles({});
+  const dispatch = useDispatch();
+  const { user, } = useSelector(state => state);
+  const [message, setMessage] = useState('');
   return (
     <div className={styles.inputMessageBlock}>
       <div className={styles.topBlock}>
@@ -62,7 +67,7 @@ const InputMessage = () => {
       <div className={styles.centerBlock}>
         <div className={styles.userNameBlock}>
           <div className={styles.userName}>
-            神 Q 超人
+            {user.name}
           </div>
           <span>
             &nbsp;
@@ -77,6 +82,10 @@ const InputMessage = () => {
             rows={5}
             rowsMax={5}
             className={classes.textField}
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
           />
         </div>
       </div>
@@ -107,6 +116,12 @@ const InputMessage = () => {
         <Button
           classes={{
             root: `${classes.button} ${classes.send}`,
+          }}
+          onClick={() => {
+            if (message.replace(' ', '')) {
+              dispatch(sendMessage(message));
+              setMessage('');
+            }
           }}
         >
           {'傳送 >'}
