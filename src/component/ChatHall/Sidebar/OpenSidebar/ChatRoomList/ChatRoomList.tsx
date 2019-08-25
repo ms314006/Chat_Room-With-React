@@ -52,7 +52,7 @@ const ChatRoomList = (props: any) => {
                 {`${chatRoom.id} ${chatRoom.name}`}
               </div>
               <div>
-                {fillZeroToTwoLength(chatRoom.numberOfPeople)}
+                {fillZeroToTwoLength(chatRoom.users.length)}
                 {' / '}
                 {fillZeroToTwoLength(chatRoom.numberLimit)}
               </div>

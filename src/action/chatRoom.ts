@@ -6,3 +6,15 @@ export const createUser = (nickname: string) => ({
     nickname,
   },
 });
+
+export const CREATE_CHATROOM = 'CREATE_CHATROOM';
+
+export const createChatRoom = (
+  name: string, numberLimit: number
+) => ({
+  type: CREATE_CHATROOM,
+  payload: {
+    name,
+    numberLimit,
+  },
+});

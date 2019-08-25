@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import ChatRoomList from './ChatRoomList';
+import CreateChatRoom from './CreateChatRoom';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -44,44 +49,23 @@ const useStyles = makeStyles({
   createChatRoomButton: {
     width: '100%',
   },
+  createChatRoomWindow: {
+    width: '300px',
+    height: '360px',
+    background: '#252526',
+    borderRadius: '0px 0px',
+  },
+  createChatRoomTitle: {
+    textAlign: 'center',
+    color: '#9CDCFE',
+  },
 });
-
-const chatRoomList = [
-  {
-    id: 'C239', name: '吃飯不揪', numberOfPeople: 16, numberLimit: 20,
-  },
-  {
-    id: 'C192', name: '謝謝照顧', numberOfPeople: 2, numberLimit: 5,
-  },
-  {
-    id: 'C543', name: '一日群組', numberOfPeople: 1, numberLimit: 14,
-  },
-  {
-    id: 'C987', name: '2176 英精班', numberOfPeople: 5, numberLimit: 12,
-  },
-  {
-    id: 'C194', name: '謝謝照顧', numberOfPeople: 2, numberLimit: 5,
-  },
-  {
-    id: 'C342', name: '一日群組', numberOfPeople: 1, numberLimit: 14,
-  },
-  {
-    id: 'C246', name: '2176 英精班', numberOfPeople: 5, numberLimit: 12,
-  },
-  {
-    id: 'C666', name: '謝謝照顧', numberOfPeople: 2, numberLimit: 5,
-  },
-  {
-    id: 'C245', name: '一日群組', numberOfPeople: 1, numberLimit: 14,
-  },
-  {
-    id: 'C724', name: '2176 英精班', numberOfPeople: 5, numberLimit: 12,
-  }
-];
 
 const OpenSidebar = (props: any) => {
   const classes = useStyles({});
+  const { chatHall, } = useSelector(state => state);
   const { closeSidebar, } = props;
+  const [isOpenCreateChatRoom, setIsOpenCreateChatRoom] = useState(false);
   return (
     <>
       <div className={styles.titleBlock}>
@@ -136,17 +120,40 @@ const OpenSidebar = (props: any) => {
           )}
         />
       </div>
-      <ChatRoomList title="公開聊天室" chatRoomList={chatRoomList} />
-      <ChatRoomList title="最近加入聊天室" chatRoomList={chatRoomList} />
+      <ChatRoomList title="公開聊天室" chatRoomList={chatHall.chatRooms} />
+      <ChatRoomList title="最近加入聊天室" chatRoomList={chatHall.chatRooms} />
       <div className={styles.createChatRoom}>
         <Button
           classes={{
             root: `${classes.createChatRoomButton} ${classes.button} ${classes.fontColor}`,
           }}
+          onClick={() => { setIsOpenCreateChatRoom(true); }}
         >
           新增聊天室
         </Button>
       </div>
+      <Dialog
+        open={isOpenCreateChatRoom}
+        onClose={() => { setIsOpenCreateChatRoom(false); }}
+        PaperProps={{
+          classes: {
+            root: classes.createChatRoomWindow,
+          },
+        }}
+      >
+        <DialogTitle
+          classes={{
+            root: classes.createChatRoomTitle,
+          }}
+        >
+          新增聊天室
+        </DialogTitle>
+        <DialogContent>
+          <CreateChatRoom
+            onClose={() => { setIsOpenCreateChatRoom(false); }}
+          />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

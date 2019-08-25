@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -6,6 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import { createChatRoom } from '../../../../../action/chatRoom';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -48,6 +50,7 @@ const useStyles = makeStyles({
 const CreateChatRoom = (props: any) => {
   const classes = useStyles({});
   const { onClose, } = props;
+  const dispatch = useDispatch();
   const [chatRoomInfo, setChatRoomInfo] = useState({
     name: '',
     numberPeopleLimit: 1,
@@ -68,7 +71,9 @@ const CreateChatRoom = (props: any) => {
     };
 
     if (checkData()) {
-      console.log('dafsdfdsfs');
+      dispatch(createChatRoom(
+        chatRoomInfo.name, chatRoomInfo.numberPeopleLimit
+      ));
       onClose();
     }
   };

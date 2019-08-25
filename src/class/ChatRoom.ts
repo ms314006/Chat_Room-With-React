@@ -3,12 +3,18 @@ import { IUser } from '../interface/IUser';
 
 class ChatRoom implements IChatRoom {
 
+  id: string;
+
   name: string;
+
+  numberLimit: number;
 
   users: IUser[] = [];
 
-  constructor(name: string) {
+  constructor(name: string, numberLimit: number) {
+    this.id = `C${String(Math.random()).slice(-3)}.`;
     this.name = name;
+    this.numberLimit = numberLimit;
   }
 
   addUser = (user: IUser): void => {
