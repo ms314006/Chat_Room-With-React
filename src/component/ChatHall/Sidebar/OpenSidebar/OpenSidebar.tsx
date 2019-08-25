@@ -63,7 +63,7 @@ const useStyles = makeStyles({
 
 const OpenSidebar = (props: any) => {
   const classes = useStyles({});
-  const { chatHall, } = useSelector(state => state);
+  const { publicChatRooms, } = useSelector(state => state);
   const { closeSidebar, } = props;
   const [isOpenCreateChatRoom, setIsOpenCreateChatRoom] = useState(false);
   return (
@@ -120,8 +120,8 @@ const OpenSidebar = (props: any) => {
           )}
         />
       </div>
-      <ChatRoomList title="公開聊天室" chatRoomList={chatHall.chatRooms} />
-      <ChatRoomList title="最近加入聊天室" chatRoomList={chatHall.chatRooms} />
+      <ChatRoomList title="公開聊天室" chatRoomList={publicChatRooms} />
+      <ChatRoomList title="最近加入聊天室" chatRoomList={publicChatRooms} />
       <div className={styles.createChatRoom}>
         <Button
           classes={{

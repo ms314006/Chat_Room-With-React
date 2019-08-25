@@ -1,40 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import JoinMessage from './JoinMessage';
 import UserMessage from './UserMessage';
 import SelfMessage from './SelfMessage';
-import { fillZeroToTwoLength } from '../../../../utils';
+import { getCurrentTime } from '../../../../utils';
 import styles from './index.scss';
 
-const MessageTime = () => {
-  const getCurrentTime = () => {
-
-    const date = new Date();
-
-    return `${fillZeroToTwoLength(date.getHours())}:${fillZeroToTwoLength(date.getMinutes())}`;
-  };
-  return (
-    <div className={styles.timeBlock}>
-      {getCurrentTime()}
-    </div>
-  );
-};
-
 const ChatWindow = () => {
-  const [messages] = useState([
-    { name: '小馬彬', message: '晚上要餓著了', },
-    { name: '神 Q 超人', message: '我也是  = =', },
-    { name: '神 Q 超人', message: '乾', },
-    { name: '神 Q 超人', message: '風雨幹大', },
-    { name: '小馬彬', message: '如果有王子家的屯糧就能用在這一時', },
-    { name: '王子', message: '沒屯啊', }
-  ]);
+  const {
+    currentChatRoom: { messages, },
+    username,
+  } = useSelector(state => state);
 
   const isSameOfLast = (index: number) => (
     index !== 0 && messages[index - 1].name === messages[index].name
   );
 
   const isSelfMessage = (index: number) => (
-    messages[index].name === '神 Q 超人'
+    messages[index].name === username
   );
 
   const getMessageGroup = (index: number) => {
@@ -42,10 +25,7 @@ const ChatWindow = () => {
     const generateMessageGroupArray = (messagesRange, initMessage) => {
       const messageGroup = [...initMessage];
       messagesRange.every((message: any, i: number) => {
-        if (
-          i !== messagesRange.length - 1
-          && messageGroup[0].name === messagesRange[i].name
-        ) {
+        if (messageGroup[0].name === messagesRange[i].name) {
           messageGroup.push(message);
           return true;
         }
@@ -69,8 +49,10 @@ const ChatWindow = () => {
     <div className={styles.chatWindow}>
       <div className={styles.messageBlock}>
         <div className={styles.message}>
-          <MessageTime />
-          <JoinMessage name="神 Q 超人超人超人超人超人超人超人超人超人超人超人超人超人超人超人超人超人超人" />
+          <div className={styles.timeBlock}>
+            {getCurrentTime()}
+          </div>
+          <JoinMessage name={username} />
         </div>
         {
           messages.map((message: any, index: number) => (
@@ -81,7 +63,9 @@ const ChatWindow = () => {
                   key={message.message}
                   className={styles.message}
                 >
-                  <MessageTime />
+                  <div className={styles.timeBlock}>
+                    {messages.sendTime}
+                  </div>
                   {getMessageGroup(index)}
                 </div>
               )

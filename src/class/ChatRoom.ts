@@ -31,7 +31,6 @@ class ChatRoom implements IChatRoom {
   addMessage = (message: IMessage): void => {
     this.messages.push(message);
   }
-
 }
 
 export default ChatRoom;

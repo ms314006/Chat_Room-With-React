@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Sidebar from './Sidebar';
@@ -7,15 +7,15 @@ import styles from './index.scss';
 
 const ChatHall = withRouter(({ history, }) => {
 
-  const { user, } = useSelector(state => state);
-  if (user === null) {
+  const { username, } = useSelector(state => state);
+
+  if (!username) {
     history.push('/');
+    return null;
   }
 
   return (
-    <div
-      className={styles.chatHall}
-    >
+    <div className={styles.chatHall}>
       <Sidebar />
       <ChatView />
     </div>

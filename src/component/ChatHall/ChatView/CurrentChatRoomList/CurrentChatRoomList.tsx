@@ -52,11 +52,11 @@ const RoomList = (props: any) => {
 };
 
 const CurrentChatRoomList = () => {
-  const { user, } = useSelector(state => state);
+  const { participateChatRooms, } = useSelector(state => state);
   return (
     <div className={styles.listBlock}>
       {
-        user.chatRooms.map((chatRoom: IChatRoom) => (
+        participateChatRooms.map((chatRoom: IChatRoom) => (
           <RoomList
             key={chatRoom.id}
             chatRoom={chatRoom}

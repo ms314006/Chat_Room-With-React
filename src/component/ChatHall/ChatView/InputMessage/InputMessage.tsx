@@ -53,8 +53,16 @@ const useStyles = makeStyles({
 const InputMessage = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
-  const { user, } = useSelector(state => state);
+  const { username, } = useSelector(state => state);
   const [message, setMessage] = useState('');
+
+  const submitMessage = () => {
+    if (message.replace(' ', '')) {
+      dispatch(sendMessage(message));
+      setMessage('');
+    }
+  };
+
   return (
     <div className={styles.inputMessageBlock}>
       <div className={styles.topBlock}>
@@ -67,7 +75,7 @@ const InputMessage = () => {
       <div className={styles.centerBlock}>
         <div className={styles.userNameBlock}>
           <div className={styles.userName}>
-            {user.name}
+            {username}
           </div>
           <span>
             &nbsp;
@@ -85,6 +93,11 @@ const InputMessage = () => {
             value={message}
             onChange={(e) => {
               setMessage(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                submitMessage();
+              }
             }}
           />
         </div>
@@ -117,12 +130,7 @@ const InputMessage = () => {
           classes={{
             root: `${classes.button} ${classes.send}`,
           }}
-          onClick={() => {
-            if (message.replace(' ', '')) {
-              dispatch(sendMessage(message));
-              setMessage('');
-            }
-          }}
+          onClick={submitMessage}
         >
           {'傳送 >'}
         </Button>
