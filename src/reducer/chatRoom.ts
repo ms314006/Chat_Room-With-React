@@ -37,6 +37,16 @@ const chatRoomReducer = (state = initiState, action: any) => {
       state.currentChatRoom.addMessage(message);
       return { ...state, };
     }
+    case actions.CHANGE_CURRENT_CHAT_ROOM:
+      return {
+        ...state,
+        currentChatRoom: action.payload.chatRoom,
+      };
+    case actions.LEAVE_CHAT_ROOM: {
+      state.user.leaveChatRoom(action.payload.chatRoom);
+      console.log(JSON.stringify(state.user.chatRooms[0].name))
+      return { ...state, };
+    }
     default:
       return { ...state, };
   }

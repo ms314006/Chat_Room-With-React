@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import { IChatRoom } from '../../../../interface/IChatRoom';
+import {
+  chageCurrentChatRoom, leaveChatRoom, updateNextChatRoom
+} from '../../../../action/chatRoom';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -20,18 +25,24 @@ const useStyles = makeStyles({
 
 const RoomList = (props: any) => {
   const classes = useStyles({});
-  const { roomName, } = props;
+  const { chatRoom, } = props;
+  const dispatch = useDispatch();
+  const { currentChatRoom, } = useSelector(state => state);
   return (
     <div
-      key={roomName}
       className={
-        `${styles.roomList} ${roomName === '大家一起聊吧！' ? styles.currentRoom : ''}`
+        `${styles.roomList} ${chatRoom.name === currentChatRoom.name ? styles.currentRoom : ''}`
       }
+      onClick={() => { dispatch(chageCurrentChatRoom(chatRoom)); }}
+      onKeyDown={() => {}}
     >
-      <div>{roomName}</div>
+      <div>{`${chatRoom.id} ${chatRoom.name}`}</div>
       <IconButton
         classes={{
           root: classes.root,
+        }}
+        onClick={() => {
+          dispatch(leaveChatRoom(chatRoom));
         }}
       >
         <i className="fas fa-times" />
@@ -41,12 +52,15 @@ const RoomList = (props: any) => {
 };
 
 const CurrentChatRoomList = () => {
-  const [chatRooms] = useState(['B022.隨機配對', '大家一起聊吧！', 'B023.隨機配對', 'B024.隨機配對', 'B025.隨機配對', 'B026.隨機配對']);
+  const { user, } = useSelector(state => state);
   return (
     <div className={styles.listBlock}>
       {
-        chatRooms.map(roomName => (
-          <RoomList key={roomName} roomName={roomName} />
+        user.chatRooms.map((chatRoom: IChatRoom) => (
+          <RoomList
+            key={chatRoom.id}
+            chatRoom={chatRoom}
+          />
         ))
       }
     </div>

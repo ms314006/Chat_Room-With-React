@@ -1,3 +1,5 @@
+import { IChatRoom } from "../interface/IChatRoom";
+
 export const CREATE_USER = 'CREATE_USER';
 
 export const createUser = (nickname: string) => ({
@@ -25,5 +27,23 @@ export const sendMessage = (message: string) => ({
   type: SEND_MESSAGE,
   payload: {
     message,
+  },
+});
+
+export const CHANGE_CURRENT_CHAT_ROOM = 'CHANGE_CURRENT_CHAT_ROOM';
+
+export const chageCurrentChatRoom = (chatRoom: IChatRoom) => ({
+  type: CHANGE_CURRENT_CHAT_ROOM,
+  payload: {
+    chatRoom,
+  },
+});
+
+export const LEAVE_CHAT_ROOM = 'LEAVE_CHAT_ROOM';
+
+export const leaveChatRoom = (chatRoom: IChatRoom) => ({
+  type: LEAVE_CHAT_ROOM,
+  payload: {
+    chatRoom,
   },
 });
