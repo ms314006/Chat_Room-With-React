@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import { IChatRoom } from '../../../../../interface/IChatRoom';
 import { joinChatRoom, chageCurrentChatRoom } from '../../../../../action/chatRoom';
 import { fillZeroToTwoLength } from '../../../../../utils';
 import styles from './index.scss';
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
 const ChatRoomList = (props: any) => {
   const classes = useStyles({});
   const dispatch = useDispatch();
-  const { participateChatRooms, } = useSelector(state => state);
+  const { participateChatRooms, searchWord } = useSelector(state => state);
   const { chatRoomList, title, } = props;
   const [isOpen, setIsOpen] = useState(true);
   return (
@@ -47,29 +48,32 @@ const ChatRoomList = (props: any) => {
         }
       >
         {
-          chatRoomList.map((chatRoom: any) => (
-            <div
-              key={chatRoom.id}
-              className={styles.list}
-              onClick={() => {
-                if (participateChatRooms.indexOf(chatRoom) === -1) {
-                  dispatch(joinChatRoom(chatRoom));
-                } else {
-                  dispatch(chageCurrentChatRoom(chatRoom));
-                }
-              }}
-              onKeyDown={() => {}}
-            >
-              <div>
-                {`${chatRoom.id} ${chatRoom.name}`}
+          chatRoomList
+            .filter((chatRoom: IChatRoom) => (
+              searchWord === '' || chatRoom.name.indexOf(searchWord) !== -1))
+            .map((chatRoom: IChatRoom) => (
+              <div
+                key={chatRoom.id}
+                className={styles.list}
+                onClick={() => {
+                  if (participateChatRooms.indexOf(chatRoom) === -1) {
+                    dispatch(joinChatRoom(chatRoom));
+                  } else {
+                    dispatch(chageCurrentChatRoom(chatRoom));
+                  }
+                }}
+                onKeyDown={() => {}}
+              >
+                <div>
+                  {`${chatRoom.id} ${chatRoom.name}`}
+                </div>
+                <div>
+                  {fillZeroToTwoLength(chatRoom.users.length)}
+                  {' / '}
+                  {fillZeroToTwoLength(chatRoom.numberLimit)}
+                </div>
               </div>
-              <div>
-                {fillZeroToTwoLength(chatRoom.users.length)}
-                {' / '}
-                {fillZeroToTwoLength(chatRoom.numberLimit)}
-              </div>
-            </div>
-          ))
+            ))
         }
       </div>
     </div>

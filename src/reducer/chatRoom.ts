@@ -55,6 +55,7 @@ const autoResponse = () => {
 
 
 const initiState = {
+  searchWord: '',
   username: '',
   publicChatRooms: [],
   participateChatRooms: [],
@@ -117,6 +118,11 @@ const chatRoomReducer = (state = initiState, action: any) => {
       [currentChatRoom] = user.chatRooms;
       return updateChatRoomInfo();
     }
+    case actions.SET_SEARCH_WORD:
+      return {
+        ...state,
+        searchWord: action.payload.searchWord,
+      };
     default:
       return { ...state, };
   }

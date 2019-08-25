@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ChatRoomList from './ChatRoomList';
 import CreateChatRoom from './CreateChatRoom';
+import { setSearchWord } from '../../../../action/chatRoom';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -63,7 +64,8 @@ const useStyles = makeStyles({
 
 const OpenSidebar = (props: any) => {
   const classes = useStyles({});
-  const { publicChatRooms, } = useSelector(state => state);
+  const dispatch = useDispatch();
+  const { publicChatRooms, searchWord, } = useSelector(state => state);
   const { closeSidebar, } = props;
   const [isOpenCreateChatRoom, setIsOpenCreateChatRoom] = useState(false);
   return (
@@ -104,6 +106,10 @@ const OpenSidebar = (props: any) => {
         <Input
           disableUnderline
           placeholder="搜尋聊天室名稱或編號"
+          value={searchWord}
+          onChange={(e) => {
+            dispatch(setSearchWord(e.target.value));
+          }}
           classes={{
             root: `${classes.search} ${classes.fontColor}`,
           }}

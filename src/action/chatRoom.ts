@@ -56,3 +56,12 @@ export const leaveChatRoom = (chatRoom: IChatRoom) => ({
     chatRoom,
   },
 });
+
+export const SET_SEARCH_WORD = 'SET_SEARCH_WORD';
+
+export const setSearchWord = (searchWord: string) => ({
+  type: SET_SEARCH_WORD,
+  payload: {
+    searchWord,
+  },
+});
