@@ -1,0 +1,19 @@
+.initialChatWindow {
+    grid-row: 2 / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #6C6C6C;
+    overflow-y: auto;
+}
+
+.actionBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 24px 0px;
+    height: 160px;
+    width: 200px;
+}
