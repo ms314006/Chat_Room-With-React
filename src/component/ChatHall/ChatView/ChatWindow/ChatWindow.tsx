@@ -13,7 +13,9 @@ const ChatWindow = () => {
   } = useSelector(state => state);
 
   const isSameOfLast = (index: number) => (
-    index !== 0 && messages[index - 1].name === messages[index].name
+    index !== 0
+    && messages[index - 1].name === messages[index].name
+    && messages[index - 1].sendTime === messages[index].sendTime
   );
 
   const isSelfMessage = (index: number) => (
@@ -64,7 +66,7 @@ const ChatWindow = () => {
                   className={styles.message}
                 >
                   <div className={styles.timeBlock}>
-                    {messages.sendTime}
+                    {message.sendTime}
                   </div>
                   {getMessageGroup(index)}
                 </div>
