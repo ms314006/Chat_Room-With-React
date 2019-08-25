@@ -9,7 +9,7 @@ class User implements IUser {
   chatRooms: IChatRoom[] = [];
 
   constructor(name: string) {
-    this.name = name || uuidv1();
+    this.name = name || `uuid. ${uuidv1().slice(0, 6)}`;
   }
 
   joinChatRoom = (chatRoom: IChatRoom) => {
