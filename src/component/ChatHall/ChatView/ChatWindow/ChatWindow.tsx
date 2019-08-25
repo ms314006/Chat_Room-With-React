@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import JoinMessage from './JoinMessage';
 import UserMessage from './UserMessage';
@@ -7,10 +7,18 @@ import { getCurrentTime } from '../../../../utils';
 import styles from './index.scss';
 
 const ChatWindow = () => {
+  const chatWindow = useRef(null);
   const {
     currentChatRoom: { messages, },
     username,
   } = useSelector(state => state);
+
+  const updateScallPosition = useCallback(
+    () => {
+      chatWindow.current.scrollTop = chatWindow.current.scrollHeight;
+    },
+    [messages]
+  );
 
   const isSameOfLast = (index: number) => (
     index !== 0
@@ -27,7 +35,8 @@ const ChatWindow = () => {
     const generateMessageGroupArray = (messagesRange, initMessage) => {
       const messageGroup = [...initMessage];
       messagesRange.every((message: any, i: number) => {
-        if (messageGroup[0].name === messagesRange[i].name) {
+        if (messageGroup[0].name === messagesRange[i].name
+        && messageGroup[0].sendTime === messagesRange[i].sendTime) {
           messageGroup.push(message);
           return true;
         }
@@ -40,7 +49,7 @@ const ChatWindow = () => {
     messagesRange = messagesRange.slice(index + 1);
     const initMessage: any[] = [messages[index]];
     const messageGroup = generateMessageGroupArray(messagesRange, initMessage);
-
+    updateScallPosition();
     return (
       isSelfMessage(index)
         ? <SelfMessage messageGroup={messageGroup} />
@@ -48,7 +57,10 @@ const ChatWindow = () => {
     );
   };
   return (
-    <div className={styles.chatWindow}>
+    <div
+      ref={chatWindow}
+      className={styles.chatWindow}
+    >
       <div className={styles.messageBlock}>
         <div className={styles.message}>
           <div className={styles.timeBlock}>
@@ -62,7 +74,7 @@ const ChatWindow = () => {
               ? null
               : (
                 <div
-                  key={message.message}
+                  key={message.id}
                   className={styles.message}
                 >
                   <div className={styles.timeBlock}>
