@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 const InputMessage = () => {
   const classes = useStyles({});
   const dispatch = useDispatch();
-  const { username, } = useSelector(state => state);
+  const { username, currentChatRoom, } = useSelector(state => state);
   const [message, setMessage] = useState('');
 
   const submitMessage = () => {
@@ -67,9 +67,13 @@ const InputMessage = () => {
     <div className={styles.inputMessageBlock}>
       <div className={styles.topBlock}>
         <i className={`fas fa-user ${styles.iconGap}`} />
-        <span>3 / 5</span>
-        <i className={`fas fa-lock ${styles.iconGap}`} />
-        <span>私密</span>
+        <span>
+          {currentChatRoom.numberParticipate}
+          {' / '}
+          {currentChatRoom.numberLimit}
+        </span>
+        <i className={`fas fa-lock-open ${styles.iconGap}`} />
+        <span>公開</span>
         <i className={`fas fa-cog ${styles.iconGap}`} />
       </div>
       <div className={styles.centerBlock}>
