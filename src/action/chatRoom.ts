@@ -39,6 +39,15 @@ export const chageCurrentChatRoom = (chatRoom: IChatRoom) => ({
   },
 });
 
+export const JOIN_CHAT_ROOM = 'JOIN_CHAT_ROOM';
+
+export const joinChatRoom = (chatRoom: IChatRoom) => ({
+  type: JOIN_CHAT_ROOM,
+  payload: {
+    chatRoom,
+  },
+});
+
 export const LEAVE_CHAT_ROOM = 'LEAVE_CHAT_ROOM';
 
 export const leaveChatRoom = (chatRoom: IChatRoom) => ({

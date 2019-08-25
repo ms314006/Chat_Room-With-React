@@ -60,6 +60,11 @@ const chatRoomReducer = (state = initiState, action: any) => {
     case actions.CHANGE_CURRENT_CHAT_ROOM:
       currentChatRoom = action.payload.chatRoom;
       return updateChatRoomInfo();
+    case actions.JOIN_CHAT_ROOM: {
+      user.joinChatRoom(action.payload.chatRoom);
+      currentChatRoom = action.payload.chatRoom;
+      return updateChatRoomInfo();
+    }
     case actions.LEAVE_CHAT_ROOM: {
       user.leaveChatRoom(action.payload.chatRoom);
       [currentChatRoom] = user.chatRooms;

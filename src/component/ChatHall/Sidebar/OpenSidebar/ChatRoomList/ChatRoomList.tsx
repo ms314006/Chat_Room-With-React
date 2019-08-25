@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
+import { joinChatRoom, chageCurrentChatRoom } from '../../../../../action/chatRoom';
 import { fillZeroToTwoLength } from '../../../../../utils';
 import styles from './index.scss';
 
@@ -12,6 +14,8 @@ const useStyles = makeStyles({
 
 const ChatRoomList = (props: any) => {
   const classes = useStyles({});
+  const dispatch = useDispatch();
+  const { participateChatRooms, } = useSelector(state => state);
   const { chatRoomList, title, } = props;
   const [isOpen, setIsOpen] = useState(true);
   return (
@@ -47,6 +51,14 @@ const ChatRoomList = (props: any) => {
             <div
               key={chatRoom.id}
               className={styles.list}
+              onClick={() => {
+                if (participateChatRooms.indexOf(chatRoom) === -1) {
+                  dispatch(joinChatRoom(chatRoom));
+                } else {
+                  dispatch(chageCurrentChatRoom(chatRoom));
+                }
+              }}
+              onKeyDown={() => {}}
             >
               <div>
                 {`${chatRoom.id} ${chatRoom.name}`}
