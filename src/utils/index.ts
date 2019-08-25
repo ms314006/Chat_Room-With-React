@@ -14,3 +14,7 @@ export const getCurrentTime = () => {
 
   return `${fillZeroToTwoLength(date.getHours())}:${fillZeroToTwoLength(date.getMinutes())}`;
 };
+
+export const getRandom = (min: number, max: number) => (
+  Math.floor(Math.random() * (max - min + 1)) + min
+);

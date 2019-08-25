@@ -10,7 +10,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ChatRoomList from './ChatRoomList';
 import CreateChatRoom from './CreateChatRoom';
-import { setSearchWord } from '../../../../action/chatRoom';
+import {
+  setSearchWord, joinChatRoom, chageCurrentChatRoom
+} from '../../../../action/chatRoom';
+import { getRandom } from '../../../../utils';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -65,7 +68,9 @@ const useStyles = makeStyles({
 const OpenSidebar = (props: any) => {
   const classes = useStyles({});
   const dispatch = useDispatch();
-  const { publicChatRooms, searchWord, } = useSelector(state => state);
+  const {
+    publicChatRooms, participateChatRooms, searchWord,
+  } = useSelector(state => state);
   const { closeSidebar, } = props;
   const [isOpenCreateChatRoom, setIsOpenCreateChatRoom] = useState(false);
   return (
@@ -97,6 +102,17 @@ const OpenSidebar = (props: any) => {
         <Button
           classes={{
             root: `${classes.button} ${classes.fontColor}`,
+          }}
+          onClick={() => {
+            const publicNumberChatRooms = publicChatRooms.length;
+            const randomRoom = publicChatRooms[
+              getRandom(0, publicNumberChatRooms - 1)
+            ];
+            if (participateChatRooms.indexOf(randomRoom) === -1) {
+              dispatch(joinChatRoom(randomRoom));
+            } else {
+              dispatch(chageCurrentChatRoom(randomRoom));
+            }
           }}
         >
           隨機進入群組
