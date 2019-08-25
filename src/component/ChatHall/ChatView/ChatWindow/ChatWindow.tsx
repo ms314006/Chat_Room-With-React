@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import JoinMessage from './JoinMessage';
 import UserMessage from './UserMessage';
+import SelfMessage from './SelfMessage';
 import { fillZeroToTwoLength } from '../../../../utils';
 import styles from './index.scss';
 
@@ -32,6 +33,10 @@ const ChatWindow = () => {
     index !== 0 && messages[index - 1].name === messages[index].name
   );
 
+  const isSelfMessage = (index: number) => (
+    messages[index].name === '神 Q 超人'
+  );
+
   const getMessageGroup = (index: number) => {
 
     const generateMessageGroupArray = (messagesRange, initMessage) => {
@@ -54,7 +59,11 @@ const ChatWindow = () => {
     const initMessage: any[] = [messages[index]];
     const messageGroup = generateMessageGroupArray(messagesRange, initMessage);
 
-    return <UserMessage messageGroup={messageGroup} />;
+    return (
+      isSelfMessage(index)
+        ? <SelfMessage messageGroup={messageGroup} />
+        : <UserMessage messageGroup={messageGroup} />
+    );
   };
   return (
     <div className={styles.chatWindow}>

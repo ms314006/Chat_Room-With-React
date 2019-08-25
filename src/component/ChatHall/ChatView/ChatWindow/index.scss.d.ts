@@ -4,6 +4,7 @@ export const messageBlock: string;
 export const message: string;
 export const userMessageBlock: string;
 export const userMessage: string;
+export const selfMessageColor: string;
 export const messageColor: string;
 export const tagColor: string;
 export const propertyColor: string;

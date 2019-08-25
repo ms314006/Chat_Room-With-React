@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../index.scss';
 
-const UserMessage = (props) => {
+const UserMessage = (props: any) => {
   const { messageGroup, } = props;
   return (
     <div className={styles.userMessageBlock}>
