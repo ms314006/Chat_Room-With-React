@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import JoinMessage from './JoinMessage';
 import UserMessage from './UserMessage';
+import { fillZeroToTwoLength } from '../../../../utils';
 import styles from './index.scss';
 
 const MessageTime = () => {
   const getCurrentTime = () => {
-    const fillZeroToTwoLength = (word: number) => {
-      let result = String(word);
-      if (result.length >= 2) {
-        return result;
-      }
-      while (result.length < 2) {
-        result = `0${result}`;
-      }
-      return result;
-    };
 
     const date = new Date();
 
