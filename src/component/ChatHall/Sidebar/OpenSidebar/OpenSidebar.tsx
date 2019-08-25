@@ -10,6 +10,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ChatRoomList from './ChatRoomList';
 import CreateChatRoom from './CreateChatRoom';
+import ChatRoomIsEmpty from '../../../FeedBack/ChatRoomIsEmpty';
+import IsUndone from '../../../FeedBack/IsUndone';
 import {
   setSearchWord, joinChatRoom, chageCurrentChatRoom
 } from '../../../../action/chatRoom';
@@ -73,6 +75,8 @@ const OpenSidebar = (props: any) => {
   } = useSelector(state => state);
   const { closeSidebar, } = props;
   const [isOpenCreateChatRoom, setIsOpenCreateChatRoom] = useState(false);
+  const [isOpenChatRoomEmpty, setIsOpenChatRoomEmpty] = useState(false);
+  const [isOpenUndone, setIsOpenUndone] = useState(false);
   return (
     <>
       <div className={styles.titleBlock}>
@@ -96,6 +100,7 @@ const OpenSidebar = (props: any) => {
           classes={{
             root: `${classes.button} ${classes.fontColor}`,
           }}
+          onClick={() => { setIsOpenUndone(true); }}
         >
           隨機 1 對 1 配對
         </Button>
@@ -105,6 +110,10 @@ const OpenSidebar = (props: any) => {
           }}
           onClick={() => {
             const publicNumberChatRooms = publicChatRooms.length;
+            if (publicNumberChatRooms === 0) {
+              setIsOpenChatRoomEmpty(true);
+              return;
+            }
             const randomRoom = publicChatRooms[
               getRandom(0, publicNumberChatRooms - 1)
             ];
@@ -117,6 +126,14 @@ const OpenSidebar = (props: any) => {
         >
           隨機進入群組
         </Button>
+        <ChatRoomIsEmpty
+          isOpen={isOpenChatRoomEmpty}
+          onClose={() => { setIsOpenChatRoomEmpty(false); }}
+        />
+        <IsUndone
+          isOpen={isOpenUndone}
+          onClose={() => { setIsOpenUndone(false); }}
+        />
       </div>
       <div className={styles.marginGap}>
         <Input

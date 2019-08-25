@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import IsUndone from '../../FeedBack/IsUndone';
 import mainStyles from '../../../style/index.scss';
 
 const useStyles = makeStyles({
@@ -19,33 +20,25 @@ const useStyles = makeStyles({
 
 const SetChatMode = () => {
   const classes = useStyles({});
+  const [isOpenIndone, setIsOpenIndone] = useState(false);
   return (
     <>
-      <Link
-        to="/chatHall/chat"
-        className={mainStyles.removeLinkStyle}
-        style={{ textAlign: 'center', }}
+      <Button
+        classes={{ root: classes.root, }}
+        onClick={() => { setIsOpenIndone(true); }}
       >
-        <Button
-          variant="contained"
-          classes={{
-            root: classes.root,
-          }}
-        >
-          [ 隨機配對 1 對 1 聊天 ]
-        </Button>
-      </Link>
+        [ 隨機配對 1 對 1 聊天 ]
+      </Button>
+      <IsUndone
+        isOpen={isOpenIndone}
+        onClose={() => { setIsOpenIndone(false); }}
+      />
       <Link
         to="/chatHall/randomChat"
         className={mainStyles.removeLinkStyle}
         style={{ textAlign: 'center', }}
       >
-        <Button
-          variant="contained"
-          classes={{
-            root: classes.root,
-          }}
-        >
+        <Button classes={{ root: classes.root, }}>
           [ 進入聊天大廳 ]
         </Button>
       </Link>
