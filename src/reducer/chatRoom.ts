@@ -3,7 +3,8 @@ import ChatHall from '../class/ChatHall';
 import ChatRoom from '../class/ChatRoom';
 import User from '../class/User';
 import Message from '../class/Message';
-import { getCurrentTime } from '../utils';
+import { getCurrentTime, getRandom } from '../utils';
+import { autoResponseMessageList } from '../asset/autoResponseMessages';
 
 const chatHall = new ChatHall();
 let currentChatRoom = null;
@@ -13,42 +14,44 @@ const autoResponse = () => {
   const firstWelcomeMessage = () => {
     currentChatRoom.addMessage(new Message(
       getCurrentTime(),
-      'superUser',
-      '嗨！你好啊！我是超級使用者，雖然這裡還沒什麼人，但我會偶爾回覆你的！'
-    ));
-    currentChatRoom.addMessage(new Message(
-      getCurrentTime(),
-      'superUser',
-      '但是但是，真的偶爾而已哦！你也知道超級使用者是很忙的！'
+      '最強 8+9',
+      'Hi！我是最強 8+9 ，雖然這裡還沒什麼人，但我會偶爾回覆你的！'
     ));
   };
 
   const secondWelcomeMessage = () => {
     currentChatRoom.addMessage(new Message(
       getCurrentTime(),
-      'superUser',
+      '最強 8+9',
       '欸啊啊！我忘了說，如果你在等我的時候覺得無聊，可以到神 Q 超人的 Medium 看看！'
     ));
     currentChatRoom.addMessage(new Message(
       getCurrentTime(),
-      'superUser',
+      '最強 8+9',
       'https://medium.com/enjoy-life-enjoy-coding'
     ));
     currentChatRoom.addMessage(new Message(
       getCurrentTime(),
-      'superUser',
-      '自從看了，我每次考試都一百分呢：）'
+      '最強 8+9',
+      '自從看了，我每次考試都一百分呢 ｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡'
     ));
   };
 
   switch (true){
-    case currentChatRoom.messages.length === 1:
+    case currentChatRoom.messages.length === 0:
       firstWelcomeMessage();
       break;
-    case currentChatRoom.messages.length === 4:
+    case currentChatRoom.messages.length === 2:
       secondWelcomeMessage();
       break;
     default:
+      if (getRandom(0, 15) < 10) {
+        currentChatRoom.addMessage(new Message(
+          getCurrentTime(),
+          '最強 8+9',
+          autoResponseMessageList[Number(getRandom(0, 9))]
+        ));
+      }
       break;
   }
 };
@@ -93,6 +96,7 @@ const chatRoomReducer = (state = initiState, action: any) => {
       );
       chatHall.addChatRoom(currentChatRoom);
       user.joinChatRoom(currentChatRoom);
+      autoResponse();
       return updateChatRoomInfo();
     }
     case actions.SEND_MESSAGE: {
