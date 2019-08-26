@@ -47,3 +47,14 @@
 .iconGap {
     margin: 0px 8px 0px 24px;
 }
+
+.emojiBlock {
+    box-sizing: border-box;
+    padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 460px;
+    height: 160px;
+    background: #434343;
+    box-shadow: 0px 3px 20px #000000;
+}

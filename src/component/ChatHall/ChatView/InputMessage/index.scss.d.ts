@@ -6,3 +6,4 @@ export const userName: string;
 export const inputBlock: string;
 export const bottomBlock: string;
 export const iconGap: string;
+export const emojiBlock: string;

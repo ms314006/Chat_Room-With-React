@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
+import Fade from '@material-ui/core/Fade';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import { sendMessage } from '../../../../action/chatRoom';
+import { emojiList } from '../../../../asset/emoji';
 import styles from './index.scss';
 
 const useStyles = makeStyles({
@@ -40,9 +44,14 @@ const useStyles = makeStyles({
   iconButton: {
     fontSize: '24px',
   },
-  emoji: {
-    width: '24px',
+  emojiButton: {
+    width: '140px',
+    height: '36px',
     fontSize: '12px',
+    color: '#D4D4D4',
+    '&:hover': {
+      color: '#D7BA7D',
+    },
   },
   send: {
     width: '140px',
@@ -55,6 +64,8 @@ const InputMessage = () => {
   const dispatch = useDispatch();
   const { username, currentChatRoom, } = useSelector(state => state);
   const [message, setMessage] = useState('');
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+  const [openEmoji, setOpenEmoji] = React.useState(false);
 
   const submitMessage = () => {
     if (message.replace(' ', '')) {
@@ -127,9 +138,37 @@ const InputMessage = () => {
             classes={{
               root: `${classes.button} ${classes.emoji}`,
             }}
+            onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+              setAnchorEl(event.currentTarget);
+              setOpenEmoji(!openEmoji);
+            }}
           >
             (ﾟ∀ﾟ)
           </Button>
+          <Popper open={openEmoji} anchorEl={anchorEl} placement="top" transition>
+            {({ TransitionProps, }) => (
+              <Fade {...TransitionProps} timeout={350}>
+                <Paper>
+                  <div className={styles.emojiBlock}>
+                    {
+                      emojiList.map(emoji => (
+                        <Button
+                          key={emoji}
+                          classes={{ root: classes.emojiButton, }}
+                          onClick={() => {
+                            setMessage(`${message}${emoji}`);
+                            setOpenEmoji(false);
+                          }}
+                        >
+                          {emoji}
+                        </Button>
+                      ))
+                    }
+                  </div>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
         </div>
         <Button
           classes={{
