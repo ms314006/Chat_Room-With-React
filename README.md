@@ -1,37 +1,17 @@
-## Welcome to GitHub Pages
+# Chat_Room-With-React
+Chat_Room-With-React.
 
-You can use the [editor on GitHub](https://github.com/ms314006/Chat_Room-With-React/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## 心得
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+1. 一直拖到禮拜四才在想，要怎麼設計關於聊天室的幾個物件，但是還是沒有規劃的很完整。
+2. 禮拜六早上開始切版，切版的部分沒有很困難，印象比較深刻的是 Markdown 的部分，但網址的 Markdown 沒有做好，將來會把它補上。
+3. 發現自己真的不太會處理表單，嗚嗚嗚，每次在表單的部分都搞很久，包括這一次的「創建房間」。
+4. 本來想再 8+9 身上加一點劇情，多多對話就開啟新劇情，但是時間真的不夠，嗚嗚嗚嗚。
+5. 還想加的就是 WebSocket ，但是現在的物件設計似乎沒有辦法用上，但是真的好想好想做。
 
-### Markdown
+## 運行
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ms314006/Chat_Room-With-React/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+1. clone 到專案資料夾。
+2. 運行指令 `npm install` 。
+3. 運行 `npm run start` 。
+4. 啟動瀏覽器 `http://localhost:8000/dist` 。
