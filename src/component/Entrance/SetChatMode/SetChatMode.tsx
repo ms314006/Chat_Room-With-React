@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     boxShadow: '0px 0px',
     '&:hover': {
       backgroundColor: '#696969',
+      color: '#D7BA7D',
     },
   },
 });

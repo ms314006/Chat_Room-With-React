@@ -12,15 +12,11 @@ const useStyles = makeStyles({
     background: '#252526',
     fontSize: '20px',
     boxShadow: '0px 0px',
+    color: '#D4D4D4',
     '&:hover': {
       backgroundColor: '#696969',
+      color: '#D7BA7D',
     },
-  },
-  anonymous: {
-    color: '#D7BA7D',
-  },
-  nickname: {
-    color: '#D4D4D4',
   },
 });
 
@@ -37,7 +33,7 @@ const SetNameOption = () => {
         <Button
           variant="contained"
           classes={{
-            root: `${classes.root} ${classes.anonymous}`,
+            root: classes.root,
           }}
           onClick={() => {
             dispatch(createUser(''));
@@ -54,7 +50,7 @@ const SetNameOption = () => {
         <Button
           variant="contained"
           classes={{
-            root: `${classes.root} ${classes.nickname}`,
+            root: classes.root,
           }}
         >
           [ 暱稱聊天 ]
